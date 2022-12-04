@@ -3,8 +3,8 @@ with open("./4/input") as f:
 
     counter = 0
     for line in lines:
-        sectionOne = set(list(range(int(line.split(',')[0].split('-')[0]),int(line.split(',')[0].split('-')[1]) + 1)))
-        sectionTwo = set(list(range(int(line.split(',')[1].split('-')[0]), int(line.split(',')[1].split('-')[1]) + 1)))
+        sectionOne = set(range(int(line.split(',')[0].split('-')[0]),int(line.split(',')[0].split('-')[1]) + 1))
+        sectionTwo = set(range(int(line.split(',')[1].split('-')[0]), int(line.split(',')[1].split('-')[1]) + 1))
 
         if sectionOne.issubset(sectionTwo) or sectionTwo.issubset(sectionOne):
             counter += 1
