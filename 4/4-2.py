@@ -3,18 +3,11 @@ with open("./4/input") as f:
 
     counter = 0
     for line in lines:
-        sectionOne = list(range(int(line.split(',')[0].split('-')[0]),int(line.split(',')[0].split('-')[1]) + 1))
-        sectionTwo = list(range(int(line.split(',')[1].split('-')[0]), int(line.split(',')[1].split('-')[1]) + 1))
+        sectionOne = set(list(range(int(line.split(',')[0].split('-')[0]),int(line.split(',')[0].split('-')[1]) + 1)))
+        sectionTwo = set(list(range(int(line.split(',')[1].split('-')[0]), int(line.split(',')[1].split('-')[1]) + 1)))
+        compared = sectionOne & sectionTwo
 
-        if len(sectionOne) > len(sectionTwo):
-            for numb in sectionOne:
-                if numb in sectionTwo:
-                    counter += 1
-                    break
-        else:
-            for numb in sectionTwo:
-                if numb in sectionOne:
-                    counter += 1
-                    break
+        if len(compared) != 0:
+            counter += 1
 
 print(counter)
