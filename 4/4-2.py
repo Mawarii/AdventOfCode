@@ -5,9 +5,8 @@ with open("./4/input") as f:
     for line in lines:
         sectionOne = set(list(range(int(line.split(',')[0].split('-')[0]),int(line.split(',')[0].split('-')[1]) + 1)))
         sectionTwo = set(list(range(int(line.split(',')[1].split('-')[0]), int(line.split(',')[1].split('-')[1]) + 1)))
-        compared = sectionOne & sectionTwo
-
-        if len(compared) != 0:
+        
+        if len(sectionOne.intersection(sectionTwo)) != 0:
             counter += 1
 
 print(counter)
