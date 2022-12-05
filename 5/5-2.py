@@ -1,5 +1,6 @@
 import re
 
+
 with open("./5/input-crane") as startFile:
     allBoxes = startFile.read().splitlines()
 
@@ -25,3 +26,4 @@ for move in numbersOnly:
 
 for row in allRows:
     print(row[0], end='')
+print()

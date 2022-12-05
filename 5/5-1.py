@@ -1,5 +1,6 @@
 import re
 
+
 with open("./5/input-crane") as startFile:
     allBoxes = startFile.read().splitlines()
 
@@ -19,9 +20,11 @@ with open("./5/input") as f:
         numbersOnly.append(re.findall(r'\d+', line))
 
 for move in numbersOnly:
-    for x in range(0, int(move[0])):
-        allRows[int(move[2]) - 1].insert(0, allRows[int(move[1]) - 1][0])
-        allRows[int(move[1]) - 1].pop(0)
+    move = list(map(int, move)) # convert string numbers to integers
+    for x in range(0, move[0]):
+        allRows[move[2] - 1].insert(0, allRows[move[1] - 1][0])
+        allRows[move[1] - 1].pop(0)
 
 for row in allRows:
     print(row[0], end='')
+print()
