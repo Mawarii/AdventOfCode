@@ -1,3 +1,3 @@
-# AoC2022
+# AdventOfcode
 
 https://adventofcode.com/
