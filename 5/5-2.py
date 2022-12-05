@@ -19,8 +19,9 @@ with open("./5/input") as f:
         numbersOnly.append(re.findall(r'\d+', line))
 
 for move in numbersOnly:
-    allRows[int(move[2]) - 1] = allRows[int(move[1]) - 1][:int(move[0])] + allRows[int(move[2]) - 1]
-    allRows[int(move[1]) - 1] = allRows[int(move[1]) - 1][int(move[0]):]
+    move = list(map(int, move)) # convert string numbers to integers
+    allRows[move[2] - 1] = allRows[move[1] - 1][:move[0]] + allRows[move[2] - 1]
+    allRows[move[1] - 1] = allRows[move[1] - 1][move[0]:]
 
 for row in allRows:
     print(row[0], end='')
