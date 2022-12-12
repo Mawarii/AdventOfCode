@@ -1,4 +1,4 @@
-with open("./1/input") as f:
+with open("./2022/1/input") as f:
     lines = f.readlines()
 
     sum = 0

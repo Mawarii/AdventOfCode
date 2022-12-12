@@ -5,7 +5,7 @@ def getPrio(char):
         return (ord(char)-38)
 
 result = 0
-with open("./3/input") as f:
+with open("./2022/3/input") as f:
     lines = f.read().splitlines()
 
     for line in lines:

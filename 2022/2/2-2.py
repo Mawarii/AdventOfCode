@@ -11,7 +11,7 @@ results = {
 }
 
 finalValue = 0
-with open("./2/input") as f:
+with open("./2022/2/input") as f:
     lines = f.readlines()
 
     for line in lines:

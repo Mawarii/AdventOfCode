@@ -1,7 +1,7 @@
 import re
 
 
-with open("./5/input-crane") as startFile:
+with open("./2022/5/input-crane") as startFile:
     allBoxes = startFile.read().splitlines()
 
     allRows = list()

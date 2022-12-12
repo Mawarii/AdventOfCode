@@ -1,4 +1,4 @@
-with open("./4/input") as f:
+with open("./2022/4/input") as f:
     lines = f.read().splitlines()
 
     counter = 0
