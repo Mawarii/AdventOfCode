@@ -33,13 +33,13 @@ main() {
             fi
         done
 
-        power=$((redCubes*greenCubes*blueCubes))
-        sum=$((power+sum))
+        power=$(("${redCubes}"*"${greenCubes}"*"${blueCubes}"))
+        sum=$(("${power}"+"${sum}"))
 
         redCubes=0
         greenCubes=0
         blueCubes=0
-        
+
     done < "$input"
 
     echo "${sum}"

@@ -27,7 +27,7 @@ main() {
             fi
         done
         if "${add}"; then
-            sum=$((sum + temp))
+            sum=$(("${sum}"+"${temp}"))
         else
             add=true
         fi
