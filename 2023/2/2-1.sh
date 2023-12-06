@@ -26,6 +26,7 @@ main() {
                 break
             fi
         done
+        
         if "${add}"; then
             sum=$(("${sum}"+"${temp}"))
         else
