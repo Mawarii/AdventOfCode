@@ -18,10 +18,6 @@ func Abs(x int) int {
 }
 
 func main() {
-	var left []int
-	var right []int
-	sum := 0
-
 	file, err := os.Open("input")
 
 	if err != nil {
@@ -30,22 +26,35 @@ func main() {
 
 	defer file.Close()
 
-	scanner := bufio.NewScanner(file)
+	left, right := SortLeftRight(bufio.NewScanner(file))
+
+	PartOne(left, right)
+	PartTwo(left, right)
+}
+
+func SortLeftRight(scanner *bufio.Scanner) ([]int, []int) {
+	left := make([]int, 1000)
+	right := make([]int, 1000)
+
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		leftInt, err := strconv.Atoi(strings.Split(line, "   ")[0])
+		splitted := strings.Split(line, "   ")
+
+		leftInt, err := strconv.Atoi(splitted[0])
 
 		if err != nil {
-			log.Fatal(err)
+			log.Print(err)
+			continue
 		}
 
 		left = append(left, leftInt)
 
-		rightInt, err := strconv.Atoi(strings.Split(line, "   ")[1])
+		rightInt, err := strconv.Atoi(splitted[1])
 
 		if err != nil {
-			log.Fatal(err)
+			log.Print(err)
+			continue
 		}
 
 		right = append(right, rightInt)
@@ -54,19 +63,28 @@ func main() {
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
 	sort.Ints(left)
 	sort.Ints(right)
 
-	// Part One
+	return left, right
+}
+
+func PartOne(left []int, right []int) int {
+	sum := 0
+
 	for i := 0; i < len(left); i++ {
 		diff := left[i] - right[i]
 		sum += Abs(diff)
 	}
 
-	fmt.Println("Part One:", sum)
+	fmt.Println("Solution Part One:", sum)
 
-	// Part Two
-	sum = 0
+	return sum
+}
+
+func PartTwo(left []int, right []int) int {
+	sum := 0
 
 	for i := 0; i < len(left); i++ {
 		counter := 0
@@ -79,5 +97,7 @@ func main() {
 		sum += left[i] * counter
 	}
 
-	fmt.Println("Part Two:", sum)
+	fmt.Println("Solution Part Two:", sum)
+
+	return sum
 }
