@@ -19,39 +19,36 @@ var input string = `
 `
 
 func TestSamplePartOne(t *testing.T) {
-	left, right := SortLeftRight(bufio.NewScanner(strings.NewReader(input)))
-
-	n := PartOne(left, right)
+	n := PartOne(bufio.NewScanner(strings.NewReader(input)))
 
 	assert.Equal(t, 11, n)
 }
 
 func TestSamplePartTwo(t *testing.T) {
-	left, right := SortLeftRight(bufio.NewScanner(strings.NewReader(input)))
-
-	n := PartTwo(left, right)
+	n := PartTwo(bufio.NewScanner(strings.NewReader(input)))
 
 	assert.Equal(t, 31, n)
 }
 
 func BenchmarkMain(b *testing.B) {
-	main()
+	for range b.N {
+		main()
+	}
 }
 
 func BenchmarkPartOne(b *testing.B) {
-	file, _ := os.Open("input")
-	defer file.Close()
-
-	left, right := SortLeftRight(bufio.NewScanner(file))
-
-	_ = PartOne(left, right)
+	for range b.N {
+		file, _ := os.Open("input")
+		defer file.Close()
+		_ = PartOne(bufio.NewScanner(file))
+	}
 }
 
 func BenchmarkPartTwo(b *testing.B) {
-	file, _ := os.Open("input")
-	defer file.Close()
+	for range b.N {
+		file, _ := os.Open("input")
+		defer file.Close()
 
-	left, right := SortLeftRight(bufio.NewScanner(file))
-
-	_ = PartTwo(left, right)
+		_ = PartTwo(bufio.NewScanner(file))
+	}
 }

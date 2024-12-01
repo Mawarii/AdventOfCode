@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"log"
 	"os"
 	"sort"
@@ -26,13 +25,20 @@ func main() {
 
 	defer file.Close()
 
-	left, right := SortLeftRight(bufio.NewScanner(file))
+	PartOne(bufio.NewScanner(file))
 
-	PartOne(left, right)
-	PartTwo(left, right)
+	file, err = os.Open("input")
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer file.Close()
+
+	PartTwo(bufio.NewScanner(file))
 }
 
-func SortLeftRight(scanner *bufio.Scanner) ([]int, []int) {
+func SortLeftRight(scanner *bufio.Scanner) ([]int, []int, error) {
 	left := make([]int, 1000)
 	right := make([]int, 1000)
 
@@ -67,10 +73,16 @@ func SortLeftRight(scanner *bufio.Scanner) ([]int, []int) {
 	sort.Ints(left)
 	sort.Ints(right)
 
-	return left, right
+	return left, right, nil
 }
 
-func PartOne(left []int, right []int) int {
+func PartOne(scanner *bufio.Scanner) int {
+	left, right, err := SortLeftRight(scanner)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	sum := 0
 
 	for i := 0; i < len(left); i++ {
@@ -78,12 +90,18 @@ func PartOne(left []int, right []int) int {
 		sum += Abs(diff)
 	}
 
-	fmt.Println("Solution Part One:", sum)
+	// fmt.Println("Solution Part One:", sum)
 
 	return sum
 }
 
-func PartTwo(left []int, right []int) int {
+func PartTwo(scanner *bufio.Scanner) int {
+	left, right, err := SortLeftRight(scanner)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	sum := 0
 
 	for i := 0; i < len(left); i++ {
@@ -97,7 +115,7 @@ func PartTwo(left []int, right []int) int {
 		sum += left[i] * counter
 	}
 
-	fmt.Println("Solution Part Two:", sum)
+	// fmt.Println("Solution Part Two:", sum)
 
 	return sum
 }
