@@ -2,4 +2,9 @@ module adventofcode/2
 
 go 1.23.3
 
-require github.com/imbossa/go-string-math v0.0.0-20230724140716-04161aba12b1 // indirect
+require gotest.tools v2.2.0+incompatible
+
+require (
+	github.com/google/go-cmp v0.6.0 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+)

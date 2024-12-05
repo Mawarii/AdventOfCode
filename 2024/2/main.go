@@ -14,39 +14,65 @@ func Abs(x int) int {
 	return x
 }
 
+func isStrictlyDescending(slice []int) bool {
+	for i := 1; i < len(slice); i++ {
+		if slice[i] >= slice[i-1] {
+			return false
+		}
+	}
+	return true
+}
+
+func isStrictlyAscending(slice []int) bool {
+	for i := 1; i < len(slice); i++ {
+		if slice[i] <= slice[i-1] {
+			return false
+		}
+	}
+	return true
+}
+
 //go:embed input
 var input string
 
 func main() {
+	fmt.Println(PartOne(input))
+}
+
+func PartOne(input string) int {
 	sum := 0
-	numbsInt := make([]int, 8)
+	numbers := make([]int, 8)
 	counter := false
 
 	lines := strings.Split(input, "\n")
 
 	for _, line := range lines {
-		numbs := strings.Split(line, " ")
-		numbsInt = numbsInt[:0]
+		numbersString := strings.Split(line, " ")
+		numbers = numbers[:0]
 
-		for j := 0; j < len(numbs); j++ {
-			a, _ := strconv.Atoi(numbs[j])
-			numbsInt = append(numbsInt, a)
+		for j := 0; j < len(numbersString); j++ {
+			a, _ := strconv.Atoi(numbersString[j])
+			numbers = append(numbers, a)
 		}
 
-		for i := 0; i < len(numbsInt)-2; i++ {
-			if !(numbsInt[i] > numbsInt[i+1] && numbsInt[i+1] > numbsInt[i+2]) && !(numbsInt[i] < numbsInt[i+1] && numbsInt[i+1] < numbsInt[i+2]) {
+		isDescending := isStrictlyDescending(numbers)
+
+		isAscending := isStrictlyAscending(numbers)
+
+		for i := 0; i < len(numbers)-2; i++ {
+			if !isDescending && !isAscending {
 				break
 			} else {
-				if (Abs(numbsInt[i]-numbsInt[i+1]) > 3) || (Abs(numbsInt[i+1]-numbsInt[i+2]) > 3) {
+				if (Abs(numbers[i]-numbers[i+1]) > 3) || (Abs(numbers[i+1]-numbers[i+2]) > 3) {
 					break
 				} else {
 					counter = true
 				}
 			}
-			if counter && (i == len(numbsInt)-3) {
+			if counter && (i == len(numbers)-3) {
 				sum += 1
 			}
 		}
 	}
-	fmt.Println(sum)
+	return sum
 }
