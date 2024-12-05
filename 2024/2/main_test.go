@@ -21,11 +21,11 @@ func TestSamplePartOne(t *testing.T) {
 	assert.Equal(t, 2, n)
 }
 
-// func TestSamplePartTwo(t *testing.T) {
-// 	n := PartTwo(bufio.NewScanner(strings.NewReader(input)))
+func TestSamplePartTwo(t *testing.T) {
+	n := PartTwo(testInput)
 
-// 	assert.Equal(t, 31, n)
-// }
+	assert.Equal(t, 4, n)
+}
 
 func BenchmarkMain(b *testing.B) {
 	for range b.N {
@@ -39,11 +39,8 @@ func BenchmarkPartOne(b *testing.B) {
 	}
 }
 
-// func BenchmarkPartTwo(b *testing.B) {
-// 	for range b.N {
-// 		file, _ := os.Open("input")
-// 		defer file.Close()
-
-// 		_ = PartTwo(bufio.NewScanner(file))
-// 	}
-// }
+func BenchmarkPartTwo(b *testing.B) {
+	for range b.N {
+		_ = PartTwo(input)
+	}
+}
