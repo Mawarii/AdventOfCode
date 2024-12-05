@@ -8,7 +8,7 @@ import (
 )
 
 func FindMuls(input string) []string {
-	expr, _ := regexp.Compile(`mul\(\d+,\d+\)`)
+	expr := regexp.MustCompile(`mul\(\d+,\d+\)`)
 
 	return expr.FindAllString(input, -1)
 }
@@ -34,7 +34,7 @@ func PartOne(input string) int {
 	allFindings := FindMuls(input)
 
 	for _, line := range allFindings {
-		exprInt, _ := regexp.Compile(`\d+`)
+		exprInt := regexp.MustCompile(`\d+`)
 		foundInts := exprInt.FindAllString(line, -1)
 		sum += Multiply(foundInts[0], foundInts[1])
 	}
@@ -45,14 +45,23 @@ func PartOne(input string) int {
 func PartTwo(input string) int {
 	sum := 0
 
-	exprDo, _ := regexp.Compile(`do\(\).+don't\(\)`)
+	firstDo := regexp.MustCompile(`^(.*?)don't\(\)`)
 
-	allDos := exprDo.FindAllString(input, -1)
+	allMuls := FindMuls(firstDo.FindAllString(input, 1)[0])
 
-	for _, dos := range allDos {
-		allMuls := FindMuls(dos)
+	for _, line := range allMuls {
+		exprInt, _ := regexp.Compile(`\d+`)
+		foundInts := exprInt.FindAllString(line, -1)
+		sum += Multiply(foundInts[0], foundInts[1])
+	}
 
-		for _, line := range allMuls {
+	theOtherDos := regexp.MustCompile(`do\(\)(.+?)(don't\(\)|$)`)
+	dos := theOtherDos.FindAllString(input, -1)
+
+	for _, do := range dos {
+		allMuls2 := FindMuls(do)
+
+		for _, line := range allMuls2 {
 			exprInt, _ := regexp.Compile(`\d+`)
 			foundInts := exprInt.FindAllString(line, -1)
 			sum += Multiply(foundInts[0], foundInts[1])
